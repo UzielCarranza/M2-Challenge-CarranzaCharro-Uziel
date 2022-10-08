@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class MathController {
 
-    private MathService mathService = new MathService();
+    private final MathService mathService;
 
     public MathController(MathService mathService) {
         this.mathService = mathService;
@@ -17,7 +17,13 @@ public class MathController {
 
     @PostMapping("/add")
     @ResponseStatus(HttpStatus.CREATED)
-    public MathSolution doMathOperation(@RequestBody MathSolutionDTO mathSolutionDTOAdd) {
+    public MathSolution doMathOperationAddition(@RequestBody MathSolutionDTO mathSolutionDTOAdd) {
         return mathService.addition(mathSolutionDTOAdd);
+    }
+
+    @PostMapping("/subtract")
+    @ResponseStatus(HttpStatus.CREATED)
+    public MathSolution doMathOperationSubtraction(@RequestBody MathSolutionDTO mathSolutionDTOAdd) {
+        return mathService.subtraction(mathSolutionDTOAdd);
     }
 }
