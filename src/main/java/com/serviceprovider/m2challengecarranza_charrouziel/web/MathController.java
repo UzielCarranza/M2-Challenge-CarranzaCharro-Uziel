@@ -2,40 +2,40 @@ package com.serviceprovider.m2challengecarranza_charrouziel.web;
 
 import com.serviceprovider.m2challengecarranza_charrouziel.data.MathSolution;
 import com.serviceprovider.m2challengecarranza_charrouziel.dto.MathSolutionDTO;
-import com.serviceprovider.m2challengecarranza_charrouziel.service.MathService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class MathController {
 
-    private final MathService mathService;
 
-    public MathController(MathService mathService) {
-        this.mathService = mathService;
-    }
+    private MathSolution mathSolution;
 
     @PostMapping("/add")
     @ResponseStatus(HttpStatus.CREATED)
     public MathSolution doMathOperationAddition(@RequestBody MathSolutionDTO mathSolutionDTOAdd) {
-        return mathService.addition(mathSolutionDTOAdd);
+        mathSolution = new MathSolution(mathSolutionDTOAdd.getOperand1(), mathSolutionDTOAdd.getOperand2(), "add", mathSolutionDTOAdd.add());
+        return mathSolution;
     }
 
     @PostMapping("/subtract")
     @ResponseStatus(HttpStatus.CREATED)
     public MathSolution doMathOperationSubtraction(@RequestBody MathSolutionDTO mathSolutionDTOSubtract) {
-        return mathService.subtraction(mathSolutionDTOSubtract);
+        mathSolution = new MathSolution(mathSolutionDTOSubtract.getOperand1(), mathSolutionDTOSubtract.getOperand2(), "subtract", mathSolutionDTOSubtract.subtract());
+        return mathSolution;
     }
 
     @PostMapping("/multiply")
     @ResponseStatus(HttpStatus.CREATED)
     public MathSolution doMathOperationMultiplication(@RequestBody MathSolutionDTO mathSolutionDTOMultiplication) {
-        return mathService.multiplication(mathSolutionDTOMultiplication);
+        mathSolution = new MathSolution(mathSolutionDTOMultiplication.getOperand1(), mathSolutionDTOMultiplication.getOperand2(), "multiply", mathSolutionDTOMultiplication.multiply());
+        return mathSolution;
     }
 
     @PostMapping("/divide")
     @ResponseStatus(HttpStatus.CREATED)
     public MathSolution doMathOperationDivision(@RequestBody MathSolutionDTO mathSolutionDTODivision) {
-        return mathService.division(mathSolutionDTODivision);
+        mathSolution = new MathSolution(mathSolutionDTODivision.getOperand1(), mathSolutionDTODivision.getOperand2(), "divide", mathSolutionDTODivision.divide());
+        return mathSolution;
     }
 }
