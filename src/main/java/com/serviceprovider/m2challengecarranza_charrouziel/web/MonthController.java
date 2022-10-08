@@ -16,7 +16,7 @@ public class MonthController {
     //    MONTH CONVERTER ENDPOINTS
 
     //    Data
-    List<Month> monthList = new ArrayList<>(Arrays.asList(
+    private List<Month> monthList = new ArrayList<>(Arrays.asList(
             new Month(1, "January"),
             new Month(2, "February"),
             new Month(3, "March"),
@@ -30,6 +30,9 @@ public class MonthController {
             new Month(11, "November"),
             new Month(12, "December")
     ));
+    private int min = 1;
+    private int max = 12;
+    private int random_int;
 
     //    GET METHODS
 //    Looks for a month by number
@@ -40,6 +43,15 @@ public class MonthController {
             throw new IllegalArgumentException("Input must be between 1 and 12");
         }
         return monthList.stream().filter(month -> month.getNumber() == monthNumber).findFirst().orElse(null);
+    }
+
+//    get a random month
+    @GetMapping("/randomMonth")
+    @ResponseStatus(HttpStatus.OK)
+    public Month getRandomMonth() {
+//        https://www.educative.io/answers/how-to-generate-random-numbers-in-java
+        random_int = (int) Math.floor(Math.random() * (max - min + 1) + min);
+        return getMonthByNumber(random_int);
     }
 
 }
