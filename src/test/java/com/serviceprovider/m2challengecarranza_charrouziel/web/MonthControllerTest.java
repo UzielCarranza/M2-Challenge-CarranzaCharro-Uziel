@@ -14,8 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import static org.junit.Assert.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
 @RunWith(SpringRunner.class)
@@ -76,6 +75,15 @@ public class MonthControllerTest {
                 )
                 .andDo(print())
                 .andExpect(status().isOk());
+    }
+
+    @Test
+    public void shouldNotReceiveAnEmptyResponse() throws Exception {
+        mockMvc.perform(get("/randomMonth")       // Act
+                )
+                .andDo(print())
+                .andExpect(jsonPath("$.number").isNotEmpty())
+                .andExpect(jsonPath("$.name").isNotEmpty());
     }
 
 
