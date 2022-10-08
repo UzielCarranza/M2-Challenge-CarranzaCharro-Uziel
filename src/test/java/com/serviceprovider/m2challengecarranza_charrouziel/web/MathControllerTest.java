@@ -99,7 +99,7 @@ public class MathControllerTest {
         String inputJson = mapper.writeValueAsString(inputDTOTester);
 
         mockMvc.perform(
-                        post("/add") //ACT
+                        post("/subtract") //ACT
                                 .content(inputJson)
                                 .contentType(MediaType.APPLICATION_JSON)
                 )
@@ -135,6 +135,42 @@ public class MathControllerTest {
 
         mockMvc.perform(
                         post("/multiply") //ACT
+                                .content(inputJson)
+                                .contentType(MediaType.APPLICATION_JSON)
+                )
+                .andDo(print())
+                .andExpect(status().isUnprocessableEntity()); //ASSERT
+    }
+
+
+    //    test cases for endpoint  @PostMapping("/divide")
+    @Test
+    public void shouldGet201HttpSuccessfulResponseOnDivideEndpoint() throws Exception {
+//        Arrange
+        inputDTO.setOperand1(2);
+        inputDTO.setOperand2(3);
+        String inputJson = mapper.writeValueAsString(inputDTO);
+
+        mockMvc.perform(
+                        post("/divide") //ACT
+                                .content(inputJson)
+                                .contentType(MediaType.APPLICATION_JSON)
+                )
+                .andDo(print())
+                .andExpect(status().isCreated()); //ASSERT
+
+    }
+
+    @Test
+    public void shouldReturn422StatusCodeIfInputIsNotANumericCharacterForDivideEndpoint() throws Exception {
+
+//        ARRANGE
+        MathSolutionDTOTesterString inputDTOTester = new MathSolutionDTOTesterString(1, "cuatro");
+
+        String inputJson = mapper.writeValueAsString(inputDTOTester);
+
+        mockMvc.perform(
+                        post("/divide") //ACT
                                 .content(inputJson)
                                 .contentType(MediaType.APPLICATION_JSON)
                 )
