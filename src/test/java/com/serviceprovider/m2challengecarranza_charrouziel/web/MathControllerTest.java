@@ -107,4 +107,39 @@ public class MathControllerTest {
                 .andExpect(status().isUnprocessableEntity()); //ASSERT
     }
 
+    //    test cases for endpoint  @PostMapping("/multiply")
+    @Test
+    public void shouldGet201HttpSuccessfulResponseOnMultiplyEndpoint() throws Exception {
+//        Arrange
+        inputDTO.setOperand1(2);
+        inputDTO.setOperand2(3);
+        String inputJson = mapper.writeValueAsString(inputDTO);
+
+        mockMvc.perform(
+                        post("/multiply") //ACT
+                                .content(inputJson)
+                                .contentType(MediaType.APPLICATION_JSON)
+                )
+                .andDo(print())
+                .andExpect(status().isCreated()); //ASSERT
+
+    }
+
+    @Test
+    public void shouldReturn422StatusCodeIfInputIsNotANumericCharacterForMultiplyEndpoint() throws Exception {
+
+//        ARRANGE
+        MathSolutionDTOTesterString inputDTOTester = new MathSolutionDTOTesterString(1, "three");
+
+        String inputJson = mapper.writeValueAsString(inputDTOTester);
+
+        mockMvc.perform(
+                        post("/multiply") //ACT
+                                .content(inputJson)
+                                .contentType(MediaType.APPLICATION_JSON)
+                )
+                .andDo(print())
+                .andExpect(status().isUnprocessableEntity()); //ASSERT
+    }
+
 }
