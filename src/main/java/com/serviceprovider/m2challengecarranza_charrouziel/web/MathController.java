@@ -23,7 +23,13 @@ public class MathController {
 
     @PostMapping("/subtract")
     @ResponseStatus(HttpStatus.CREATED)
-    public MathSolution doMathOperationSubtraction(@RequestBody MathSolutionDTO mathSolutionDTOAdd) {
-        return mathService.subtraction(mathSolutionDTOAdd);
+    public MathSolution doMathOperationSubtraction(@RequestBody MathSolutionDTO mathSolutionDTOSubtract) {
+        return mathService.subtraction(mathSolutionDTOSubtract);
+    }
+
+    @PostMapping("/multiply")
+    @ResponseStatus(HttpStatus.CREATED)
+    public MathSolution doMathOperationMultiplication(@RequestBody MathSolutionDTO mathSolutionDTOMultiplication) {
+        return mathService.multiplication(mathSolutionDTOMultiplication);
     }
 }
