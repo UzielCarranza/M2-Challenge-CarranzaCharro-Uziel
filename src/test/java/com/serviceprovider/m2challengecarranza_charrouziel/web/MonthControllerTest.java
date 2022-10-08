@@ -66,4 +66,17 @@ public class MonthControllerTest {
                 .andDo(print())
                 .andExpect(status().isUnprocessableEntity());
     }
+//    END OF TESTING ENDPOINT @GetMapping("/month/{monthNumber}")
+
+
+    //    STARTS TEST CASES FOR ENDPOINT @GetMapping("/randomMonth")
+    @Test
+    public void shouldGet200HttpResponseOnGetRandomMonth() throws Exception {
+        mockMvc.perform(get("/randomMonth")       // Act
+                )
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
+
+
 }
