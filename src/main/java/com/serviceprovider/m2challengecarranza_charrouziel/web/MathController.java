@@ -32,4 +32,10 @@ public class MathController {
     public MathSolution doMathOperationMultiplication(@RequestBody MathSolutionDTO mathSolutionDTOMultiplication) {
         return mathService.multiplication(mathSolutionDTOMultiplication);
     }
+
+    @PostMapping("/divide")
+    @ResponseStatus(HttpStatus.CREATED)
+    public MathSolution doMathOperationDivision(@RequestBody MathSolutionDTO mathSolutionDTODivision) {
+        return mathService.division(mathSolutionDTODivision);
+    }
 }
