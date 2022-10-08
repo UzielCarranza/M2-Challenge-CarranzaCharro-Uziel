@@ -11,6 +11,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -35,6 +36,7 @@ public class MathControllerTest {
         inputDTO = new MathSolutionDTO();
     }
 
+    //    test cases for endpoint  @PostMapping("/add")
     @Test
     public void shouldGet201HttpSuccessfulResponseOnAddEndpoint() throws Exception {
 //        Arrange
@@ -56,7 +58,7 @@ public class MathControllerTest {
     public void shouldReturn422StatusCodeIfInputIsNotANumericCharacter() throws Exception {
 
 //        ARRANGE
-        MathSolutionDTOTesterString inputDTOTester = new MathSolutionDTOTesterString(1,"one");
+        MathSolutionDTOTesterString inputDTOTester = new MathSolutionDTOTesterString(1, "one");
 
         String inputJson = mapper.writeValueAsString(inputDTOTester);
 
@@ -68,4 +70,41 @@ public class MathControllerTest {
                 .andDo(print())
                 .andExpect(status().isUnprocessableEntity()); //ASSERT
     }
+
+
+    //    test cases for endpoint  @PostMapping("/subtract")
+    @Test
+    public void shouldGet201HttpSuccessfulResponseOnSubtractEndpoint() throws Exception {
+//        Arrange
+        inputDTO.setOperand1(2);
+        inputDTO.setOperand2(3);
+        String inputJson = mapper.writeValueAsString(inputDTO);
+
+        mockMvc.perform(
+                        post("/subtract") //ACT
+                                .content(inputJson)
+                                .contentType(MediaType.APPLICATION_JSON)
+                )
+                .andDo(print())
+                .andExpect(status().isCreated()); //ASSERT
+
+    }
+
+    @Test
+    public void shouldReturn422StatusCodeIfInputIsNotANumericCharacterForSubtractEndpoint() throws Exception {
+
+//        ARRANGE
+        MathSolutionDTOTesterString inputDTOTester = new MathSolutionDTOTesterString(1, "three");
+
+        String inputJson = mapper.writeValueAsString(inputDTOTester);
+
+        mockMvc.perform(
+                        post("/add") //ACT
+                                .content(inputJson)
+                                .contentType(MediaType.APPLICATION_JSON)
+                )
+                .andDo(print())
+                .andExpect(status().isUnprocessableEntity()); //ASSERT
+    }
+
 }
