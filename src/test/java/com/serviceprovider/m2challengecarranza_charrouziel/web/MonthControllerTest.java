@@ -65,6 +65,18 @@ public class MonthControllerTest {
                 .andDo(print())
                 .andExpect(status().isUnprocessableEntity());
     }
+
+    @Test
+    public void shouldNotReceiveAnEmptyResponseOnGetMonthByNumber() throws Exception {
+        // Arrange
+//        https://www.educative.io/answers/how-to-generate-random-numbers-in-java
+        int random_int = (int) Math.floor(Math.random() * (12 - 1 + 1) + 1);
+        mockMvc.perform(get("/month/{monthNumber}", random_int)       // Act
+                )
+                .andDo(print())
+                .andExpect(jsonPath("$.number").isNotEmpty())
+                .andExpect(jsonPath("$.name").isNotEmpty());
+    }
 //    END OF TESTING ENDPOINT @GetMapping("/month/{monthNumber}")
 
 
