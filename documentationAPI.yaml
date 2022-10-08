@@ -1,0 +1,157 @@
+openapi: 3.0.1
+info:
+  title: Month-Converter and Do-math API service
+  version: v1
+  description: This is a Month-Converter and Do-math server. More information can be found here https://github.com/UzielCarranza/M2-Challenge-CarranzaCharro-Uziel
+servers:
+  - url: http://localhost:8080
+    description: Generated server url (test locally on your computer)
+paths:
+  /subtract:
+    post:
+      tags:
+        - math-controller
+      summary: Subtract two numbers and receive back the result.
+      description: For valid response (201) include only number values. Other data types (string, boolean) will generate exceptions
+      operationId: doMathOperationSubtraction
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MathSolutionDTO'
+        required: true
+      responses:
+        '201':
+          description: created
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/MathSolution'
+  /multiply:
+    post:
+      tags:
+        - math-controller
+      summary: Multiply two numbers and receive back the result.
+      description: For valid response (201) include only number values. Other data types (string, boolean) will generate exceptions
+      operationId: doMathOperationMultiplication
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MathSolutionDTO'
+        required: true
+      responses:
+        '201':
+          description: Created
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/MathSolution'
+  /divide:
+    post:
+      tags:
+        - math-controller
+      summary: Divide two numbers and receive back the result.
+      description: For valid response (201) include only number values. Other data types (string, boolean) will generate exceptions
+      operationId: doMathOperationDivision
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MathSolutionDTO'
+        required: true
+      responses:
+        '201':
+          description: Created
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/MathSolution'
+  /add:
+    post:
+      tags:
+        - math-controller
+      summary:  Add two numbers and receive back the result.
+      description: For valid response (201) include only number values. Other data types (string, boolean) will generate exceptions
+      operationId: doMathOperationAddition
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MathSolutionDTO'
+        required: true
+      responses:
+        '201':
+          description: Created
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/MathSolution'
+  /randomMonth:
+    get:
+      tags:
+        - month-controller
+      summary: Get a random month
+      description: Get a random month and its corresponding number, e.g. "1" = "January".
+      operationId: getRandomMonth
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Month'
+  /month/{monthNumber}:
+    get:
+      tags:
+        - month-controller
+      summary: Convert a number to its corresponding month
+      description: convert the number of any month to its corresponding text, e.g. "1" = "January". For valid response (200) include only number values between 1 and 12. Other ranges or data types (string, boolean) will generate exceptions
+      operationId: getMonthByNumber
+      parameters:
+        - name: monthNumber
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Month'
+components:
+  schemas:
+    MathSolutionDTO:
+      type: object
+      properties:
+        operand1:
+          type: integer
+          format: int32
+        operand2:
+          type: integer
+          format: int32
+    MathSolution:
+      type: object
+      properties:
+        operand1:
+          type: integer
+          format: int32
+        operand2:
+          type: integer
+          format: int32
+        operation:
+          type: string
+        answer:
+          type: integer
+          format: int32
+    Month:
+      type: object
+      properties:
+        number:
+          type: integer
+          format: int32
+        name:
+          type: string
