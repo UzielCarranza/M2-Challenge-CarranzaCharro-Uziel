@@ -18,4 +18,9 @@ public class MathService {
         mathSolution = new MathSolution(mathSolutionDTO.getOperand1(), mathSolutionDTO.getOperand2(), "subtract", mathSolutionDTO.subtract());
         return mathSolution;
     }
+
+    public MathSolution multiplication(MathSolutionDTO mathSolutionDTO) {
+        mathSolution = new MathSolution(mathSolutionDTO.getOperand1(), mathSolutionDTO.getOperand2(), "multiply", mathSolutionDTO.multiply());
+        return mathSolution;
+    }
 }
