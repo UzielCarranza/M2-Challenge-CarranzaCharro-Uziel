@@ -12,6 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -28,6 +29,7 @@ public class MathControllerTest {
     private ObjectMapper mapper = new ObjectMapper();
 
     private MathSolutionDTO inputDTO;
+    private MathSolutionDTOTesterString inputDTOTester;
 
     @Before
     public void setUp() {
@@ -56,7 +58,7 @@ public class MathControllerTest {
     public void shouldReturn422StatusCodeIfInputIsNotANumericCharacter() throws Exception {
 
 //        ARRANGE
-        MathSolutionDTOTesterString inputDTOTester = new MathSolutionDTOTesterString(1, "one");
+         inputDTOTester = new MathSolutionDTOTesterString(1, "one");
 
         String inputJson = mapper.writeValueAsString(inputDTOTester);
 
@@ -92,7 +94,7 @@ public class MathControllerTest {
     public void shouldReturn422StatusCodeIfInputIsNotANumericCharacterForSubtractEndpoint() throws Exception {
 
 //        ARRANGE
-        MathSolutionDTOTesterString inputDTOTester = new MathSolutionDTOTesterString(1, "three");
+        inputDTOTester = new MathSolutionDTOTesterString(1, "three");
 
         String inputJson = mapper.writeValueAsString(inputDTOTester);
 
@@ -127,7 +129,7 @@ public class MathControllerTest {
     public void shouldReturn422StatusCodeIfInputIsNotANumericCharacterForMultiplyEndpoint() throws Exception {
 
 //        ARRANGE
-        MathSolutionDTOTesterString inputDTOTester = new MathSolutionDTOTesterString(1, "three");
+         inputDTOTester = new MathSolutionDTOTesterString(1, "three");
 
         String inputJson = mapper.writeValueAsString(inputDTOTester);
 
@@ -163,7 +165,7 @@ public class MathControllerTest {
     public void shouldReturn422StatusCodeIfInputIsNotANumericCharacterForDivideEndpoint() throws Exception {
 
 //        ARRANGE
-        MathSolutionDTOTesterString inputDTOTester = new MathSolutionDTOTesterString(1, "cuatro");
+         inputDTOTester = new MathSolutionDTOTesterString(1, "cuatro");
 
         String inputJson = mapper.writeValueAsString(inputDTOTester);
 
