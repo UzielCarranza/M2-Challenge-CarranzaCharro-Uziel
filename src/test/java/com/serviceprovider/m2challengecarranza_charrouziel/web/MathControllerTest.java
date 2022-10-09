@@ -11,6 +11,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -193,4 +194,25 @@ public class MathControllerTest {
                 .andExpect(status().isUnprocessableEntity()); //ASSERT
     }
 
+
+    //    extra test cases for endpoint  @PostMapping("/add")
+    @Test
+    public void responseBodyShouldNotBeEmptyOnSuccessfulResponse() throws Exception {
+//        Arrange
+        inputDTO.setOperand1(2);
+        inputDTO.setOperand2(7);
+        String inputJson = mapper.writeValueAsString(inputDTO);
+
+        mockMvc.perform(
+                        post("/add") //ACT
+                                .content(inputJson)
+                                .contentType(MediaType.APPLICATION_JSON)
+                )
+                .andDo(print())
+                .andExpect(status().isCreated())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.operand1").isNotEmpty())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.operand2").isNotEmpty())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.operation").isNotEmpty())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.answer").isNotEmpty());
+    }
 }
