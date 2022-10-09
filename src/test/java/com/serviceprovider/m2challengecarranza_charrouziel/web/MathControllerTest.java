@@ -11,9 +11,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.web.bind.annotation.PostMapping;
-
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -182,9 +179,10 @@ public class MathControllerTest {
     public void shouldReturn422StatusCodeIfSecondOperandIsEqualToZeroForDivideEndpoint() throws Exception {
 
 //        ARRANGE
-        MathSolutionDTO mathSolutionDTO = new MathSolutionDTO(1, 0);
+        inputDTO.setOperand1(1);
+        inputDTO.setOperand2(0);
 
-        String inputJson = mapper.writeValueAsString(mathSolutionDTO);
+        String inputJson = mapper.writeValueAsString(inputDTO);
 
         mockMvc.perform(
                         post("/divide") //ACT
