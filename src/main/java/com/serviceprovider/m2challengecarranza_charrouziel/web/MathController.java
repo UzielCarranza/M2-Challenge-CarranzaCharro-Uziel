@@ -35,6 +35,9 @@ public class MathController {
     @PostMapping("/divide")
     @ResponseStatus(HttpStatus.CREATED)
     public MathSolution doMathOperationDivision(@RequestBody MathSolutionDTO mathSolutionDTODivision) {
+        if (mathSolutionDTODivision.getOperand2() == 0) {
+            throw new ArithmeticException("Operation not allowed because a number cannot be divided by " + mathSolutionDTODivision.getOperand2());
+        }
         mathSolution = new MathSolution(mathSolutionDTODivision.getOperand1(), mathSolutionDTODivision.getOperand2(), "divide", mathSolutionDTODivision.divide());
         return mathSolution;
     }
