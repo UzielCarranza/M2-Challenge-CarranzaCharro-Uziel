@@ -36,4 +36,12 @@ public class ControllerExceptionHandler {
         ResponseEntity<CustomErrorResponse> returnVal = new ResponseEntity<>(error, HttpStatus.UNPROCESSABLE_ENTITY);
         return returnVal;
     }
+    @ExceptionHandler(value = {ArithmeticException.class})
+    public ResponseEntity<CustomErrorResponse> handleNotANumberHttpRequestException(ArithmeticException ex) {
+
+        CustomErrorResponse error = new CustomErrorResponse(HttpStatus.UNPROCESSABLE_ENTITY, ex.getMessage());
+
+        ResponseEntity<CustomErrorResponse> returnVal = new ResponseEntity<>(error, HttpStatus.UNPROCESSABLE_ENTITY);
+        return returnVal;
+    }
 }
