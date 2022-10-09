@@ -178,4 +178,21 @@ public class MathControllerTest {
                 .andExpect(status().isUnprocessableEntity()); //ASSERT
     }
 
+    @Test
+    public void shouldReturn422StatusCodeIfSecondOperandIsEqualToZeroForDivideEndpoint() throws Exception {
+
+//        ARRANGE
+        MathSolutionDTO mathSolutionDTO = new MathSolutionDTO(1, 0);
+
+        String inputJson = mapper.writeValueAsString(mathSolutionDTO);
+
+        mockMvc.perform(
+                        post("/divide") //ACT
+                                .content(inputJson)
+                                .contentType(MediaType.APPLICATION_JSON)
+                )
+                .andDo(print())
+                .andExpect(status().isUnprocessableEntity()); //ASSERT
+    }
+
 }
