@@ -217,4 +217,25 @@ public class MathControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.operation").isNotEmpty())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.answer").isNotEmpty());
     }
+
+    //    extra test cases for endpoint  @PostMapping("/subtract")
+    @Test
+    public void responseBodyShouldNotBeEmptyOnSuccessfulResponseForEndpointSubtract() throws Exception {
+//        Arrange
+        inputDTO.setOperand1(22);
+        inputDTO.setOperand2(7);
+        String inputJson = mapper.writeValueAsString(inputDTO);
+
+        mockMvc.perform(
+                        post("/subtract") //ACT
+                                .content(inputJson)
+                                .contentType(MediaType.APPLICATION_JSON)
+                )
+                .andDo(print())
+                .andExpect(status().isCreated())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.operand1").isNotEmpty())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.operand2").isNotEmpty())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.operation").isNotEmpty())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.answer").isNotEmpty());
+    }
 }
