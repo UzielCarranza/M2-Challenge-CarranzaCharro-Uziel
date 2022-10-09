@@ -58,7 +58,7 @@ public class MathControllerTest {
     public void shouldReturn422StatusCodeIfInputIsNotANumericCharacter() throws Exception {
 
 //        ARRANGE
-         inputDTOTester = new MathSolutionDTOTesterString(1, "one");
+        inputDTOTester = new MathSolutionDTOTesterString(1, "one");
 
         String inputJson = mapper.writeValueAsString(inputDTOTester);
 
@@ -129,7 +129,7 @@ public class MathControllerTest {
     public void shouldReturn422StatusCodeIfInputIsNotANumericCharacterForMultiplyEndpoint() throws Exception {
 
 //        ARRANGE
-         inputDTOTester = new MathSolutionDTOTesterString(1, "three");
+        inputDTOTester = new MathSolutionDTOTesterString(1, "three");
 
         String inputJson = mapper.writeValueAsString(inputDTOTester);
 
@@ -165,7 +165,7 @@ public class MathControllerTest {
     public void shouldReturn422StatusCodeIfInputIsNotANumericCharacterForDivideEndpoint() throws Exception {
 
 //        ARRANGE
-         inputDTOTester = new MathSolutionDTOTesterString(1, "cuatro");
+        inputDTOTester = new MathSolutionDTOTesterString(1, "cuatro");
 
         String inputJson = mapper.writeValueAsString(inputDTOTester);
 
@@ -228,6 +228,49 @@ public class MathControllerTest {
 
         mockMvc.perform(
                         post("/subtract") //ACT
+                                .content(inputJson)
+                                .contentType(MediaType.APPLICATION_JSON)
+                )
+                .andDo(print())
+                .andExpect(status().isCreated())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.operand1").isNotEmpty())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.operand2").isNotEmpty())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.operation").isNotEmpty())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.answer").isNotEmpty());
+    }
+
+
+    //    extra test cases for endpoint  @PostMapping("/multiply")
+    @Test
+    public void shouldNotReturnAnEmptyBodyOnSuccessfulResponseForEndpointMultiply() throws Exception {
+//        Arrange
+        inputDTO.setOperand1(22);
+        inputDTO.setOperand2(7);
+        String inputJson = mapper.writeValueAsString(inputDTO);
+
+        mockMvc.perform(
+                        post("/multiply") //ACT
+                                .content(inputJson)
+                                .contentType(MediaType.APPLICATION_JSON)
+                )
+                .andDo(print())
+                .andExpect(status().isCreated())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.operand1").isNotEmpty())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.operand2").isNotEmpty())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.operation").isNotEmpty())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.answer").isNotEmpty());
+    }
+
+    //    extra test cases for endpoint  @PostMapping("/divide")
+    @Test
+    public void shouldNotReturnAnEmptyBodyOnSuccessfulResponseForEndpointDivide() throws Exception {
+//        Arrange
+        inputDTO.setOperand1(22);
+        inputDTO.setOperand2(7);
+        String inputJson = mapper.writeValueAsString(inputDTO);
+
+        mockMvc.perform(
+                        post("/divide") //ACT
                                 .content(inputJson)
                                 .contentType(MediaType.APPLICATION_JSON)
                 )
