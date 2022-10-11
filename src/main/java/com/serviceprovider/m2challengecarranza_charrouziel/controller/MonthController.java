@@ -1,7 +1,7 @@
-package com.serviceprovider.m2challengecarranza_charrouziel.web;
+package com.serviceprovider.m2challengecarranza_charrouziel.controller;
 
 
-import com.serviceprovider.m2challengecarranza_charrouziel.data.Month;
+import com.serviceprovider.m2challengecarranza_charrouziel.models.Month;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 

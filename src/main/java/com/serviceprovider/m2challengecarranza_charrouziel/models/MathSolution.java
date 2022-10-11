@@ -1,9 +1,4 @@
-package com.serviceprovider.m2challengecarranza_charrouziel.data;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+package com.serviceprovider.m2challengecarranza_charrouziel.models;
 
 public class MathSolution {
 

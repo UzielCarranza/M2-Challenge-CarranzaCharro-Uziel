@@ -1,7 +1,7 @@
-package com.serviceprovider.m2challengecarranza_charrouziel.web;
+package com.serviceprovider.m2challengecarranza_charrouziel.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.serviceprovider.m2challengecarranza_charrouziel.data.Month;
+import com.serviceprovider.m2challengecarranza_charrouziel.models.Month;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

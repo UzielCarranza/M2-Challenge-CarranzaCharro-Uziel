@@ -1,4 +1,4 @@
-package com.serviceprovider.m2challengecarranza_charrouziel.web;
+package com.serviceprovider.m2challengecarranza_charrouziel.controller;
 
 import com.serviceprovider.m2challengecarranza_charrouziel.errors.CustomErrorResponse;
 import com.serviceprovider.m2challengecarranza_charrouziel.errors.exception.ArgumentIsNotANumberException;

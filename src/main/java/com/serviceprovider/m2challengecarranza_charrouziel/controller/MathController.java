@@ -1,6 +1,6 @@
-package com.serviceprovider.m2challengecarranza_charrouziel.web;
+package com.serviceprovider.m2challengecarranza_charrouziel.controller;
 
-import com.serviceprovider.m2challengecarranza_charrouziel.data.MathSolution;
+import com.serviceprovider.m2challengecarranza_charrouziel.models.MathSolution;
 import com.serviceprovider.m2challengecarranza_charrouziel.dto.MathSolutionDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

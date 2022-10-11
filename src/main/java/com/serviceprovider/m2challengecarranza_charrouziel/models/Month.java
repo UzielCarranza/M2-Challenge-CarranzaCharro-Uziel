@@ -1,4 +1,4 @@
-package com.serviceprovider.m2challengecarranza_charrouziel.data;
+package com.serviceprovider.m2challengecarranza_charrouziel.models;
 
 import java.util.Objects;
 
